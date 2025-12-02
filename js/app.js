@@ -1,8 +1,8 @@
 // Element från HTML
 const select = document.getElementById("valjTyp");
-const generateBtn = document.getElementById("generateBtn");
-const resultText = document.getElementById("resultText");
-const resultImage = document.getElementById("resultImage");
+const generateBtn = document.getElementById("hamtaknapp");
+const resultText = document.getElementById("FaktaText");
+const resultImage = document.getElementById("KattBild");
 
 // --- Funktion: hämta kattfakta ---
 async function hamtaKattfakta() {
@@ -15,6 +15,7 @@ async function hamtaKattfakta() {
     const res = await fetch("https://catfact.ninja/fact?max_length=140");
     const data = await res.json();
     resultText.textContent = data.fact;
+
     // RESETTA ANIMATIONEN
     resultText.classList.remove("fade");
     void resultText.offsetWidth;

@@ -30,50 +30,98 @@
 
 <body>
 
+<!-- Header: innehåller profilbild + rubrik + tagline -->
+<header id="topHeader">
+  <img id="profilbild"
+       src="img/Hasseprofilbild.jpg"
+       alt="Hasse -The SnapCat">
 
-<h3 id="rubrik"> Hasse -The SnapCat</h3>
-
-<section id ="factSection">
-  <h2 id="factHeading">Vill du veta mer om katter?</h2>
-  <button id="factButton">Ja! Det vill jag!</button>
-  <div id="factBox">
-    <p id="factText"></p>
+  <div class="headerText">
+    <h1 id="rubrik">Hasse -The SnapCat</h1>
+    <p id="tagline">Kelsjuk, chipsälskare och full-time diva.</p>
   </div>
+</header>
+
+<!-- Introsektions: bildrad + presentationstext i samma flex-container -->
+<section id="introSection">
+
+  <!-- Tre bilder på Hasse -->
+  <div class="bildrad">
+    <img src="img/1000017990.jpg" alt="Vilande katt">
+    <img src="img/1000017989.jpg" alt="Tittut katt">
+    <img src="img/1000017988.jpg" alt="Jäspande katt">
+  </div>
+
+  <!-- Kort introduktion av Hasse -->
+  <p id="intro">
+    Det är jag som är Hasse - The SnapCat.<br>
+    Jag kommer från Färingsö men har flyttat över bron till Bromma.<br>
+    Där bor jag med mina två tjänare som gör allt för mig.<br>
+    Mina intressen är att äta, sova, bli klappad och springa runt i cirklar.
+  </p>
 </section>
 
-<div class="bildrad">
-  <img src="img/1000017987.jpg" alt="Närbild på katt">
-  <img src="img/1000017990.jpg" alt="Vilande katt">
-  <img src="img/1000017989.jpg" alt="Tittut katt">
-  <img src="img/1000017988.jpg" alt="Jäspande katt">
+<!-- Flex-container som håller kattfakta och kattbilder bredvid varandra -->
+<div id="bottomSections">
+
+  <!-- Kattfakta: knapp + ruta där faktan visas efter API-anrop -->
+  <section id="factSection">
+    <h2>Vill du veta mer om katter?</h2>
+    <button id="factButton">Ja! Det vill jag!</button>
+
+    <div id="factBox">
+      <p id="factText">Klicka på knappen för att få kattfakta</p>
+    </div>
+  </section>
+
+  <!-- Kattbilder: rasfilter + knapp + bildruta -->
+  <section id="imageSection">
+    <h2>Vill du se någon av mina vänner?</h2>
+
+    <!-- Wrapper för select + knapp -->
+    <div id="imageControls">
+      <label for="imageType">Välj här:</label>
+
+      <!-- Select fylls på dynamiskt med kattraser från TheCatAPI -->
+      <select id="imageType">
+        <option value="random">Slumpad kattvän</option>
+      </select>
+
+      <!-- Knappen som triggar API-anropet -->
+      <button id="imageButton">Visa kattvän</button>
+    </div>
+
+    <!-- Bildruta med startbild som byts ut vid klick -->
+    <div id="imageBox">
+      <img id="catImage" src="img/1000017987.jpg" alt="Närbild katt">
+    </div>
+  </section>
 </div>
 
-<p id="intro">Det är jag som är Hasse -The SnapCat.<br>
-  Jag kommer från Färingsö men flyttat över bron till Bromma.<br>
-  Där bor jag med mina två tjänare som gör allt för mig.<br> Mina intressen är att äta,
-  sova, bli klappad och springa runt i cirklar.</p>
+<!-- Sektion med länk till Kattstallet (logga + text) -->
+<section id="kattstalletSection">
 
-<section id="generator">
-  <h2>Vill du lära dig mer om katter eller se någon av mina vänner?</h2>
+  <!-- Loggan är klickbar och öppnas i ny flik -->
+  <a href="https://kattstallet.se" target="_blank">
+    <img src="img/kattstallet.jpeg"
+         alt="Kattstallet logga"
+         id="kattstalletlogga">
+  </a>
 
-  <label for="valjTyp">Välj här:</label>
-  <select id="valjTyp">
-    <option value="fact">Kattfakta</option>
-    <option value="image">Kattbild</option>
-  </select>
+  <h3 id="kattstalletRubrik">Skaffa en egen kattvän!</h3>
 
-  <button id="hamtaknapp">Hämta</button>
-
-  <!-- Här visas resultatet -->
-  <div id="resultBox">
-  <p id="FaktaText"></p>
-  <img id="KattBild" src="img/1000017987.jpg" alt="Närbild katt">
-  </div>
+  <p>
+    På <a href="https://kattstallet.se" target="_blank">Kattstallet</a>
+    finns många av mina vänner som söker nya hem och egna kärleksfulla tjänare.
+    Där kan du i lugn och ro träffa katterna, ta en fika och kanske hitta just den vän som väntat på dig.
+    Besök gärna deras fina presentbutik – allt du köper hjälper katterna att få det bättre.
+  </p>
 </section>
 
-
-  <script src="js/app.js"></script>
+<!-- Länkar till JavaScriptfilen -->
+<script src="js/app.js"></script>
 
 </body>
+
 
 </html>

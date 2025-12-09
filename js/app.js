@@ -3,7 +3,7 @@
 const factButton = document.getElementById("factButton");   // knappen som hämtar kattfakta
 const factText = document.getElementById("factText");       // rutan där faktan skrivs ut
 
-const imageTypeSelect = document.getElementById("imageType"); // select-listan med kategorier + "random"
+const imageTypeSelect = document.getElementById("imageType"); // select-listan med raser + "random"
 const imageButton = document.getElementById("imageButton");   // knappen som hämtar kattbild
 const catImage = document.getElementById("catImage");         // <img> där kattbilden visas
 
@@ -11,6 +11,7 @@ const catImage = document.getElementById("catImage");         // <img> där katt
 // HJÄLPFUNKTION: startFade(element)
 // Lägger på fade-in-animationen på ett element
 function startFade(element) {
+
   // Ta bort fade-klassen om den redan finns
   element.classList.remove("fade");
 
@@ -26,6 +27,7 @@ function startFade(element) {
 // Hämtar en slumpad kattfakta från API:t catfact.ninja
 // och skriver ut den i faktarutan
 async function hamtaKattfakta() {
+
   // Visa tillfällig text medan vi väntar på API-svar
   factText.textContent = "Hämtar kattfakta...";
 
@@ -33,7 +35,7 @@ async function hamtaKattfakta() {
     // fetch skickar en HTTP-förfrågan till API:t
     const res = await fetch("https://catfact.ninja/fact?max_length=140");
 
-    // Felhantering om API:t svarar med felkod (t.ex. 404 eller 500)
+    //felhantering om API:t svarar med felkod
     if (!res.ok) {
       throw new Error("Något gick fel: " + res.status);
     }
@@ -46,109 +48,103 @@ async function hamtaKattfakta() {
 
     // Lägg på fade-effekt på den nya texten
     startFade(factText);
+
   } catch (error) {
-    // Om något har gått fel (nätverk, API, osv.)
+    // om något har gått fel (nätverk, API, osv.)
     console.error(error);
-    // Visa ett användarvänligt felmeddelande i rutan
+    //felmeddelande visas
     factText.textContent = "Kunde inte hämta kattfakta just nu.";
   }
 }
 
-
-// FUNKTION: laddaKategorier()
-// Hämtar alla kategorier från CATAAS och fyller select-listan
+// FUNKTION: laddaKattraser()
+// Hämtar alla kattraser från TheCatAPI och fyller select-listan
 // Körs en gång när sidan laddas
-async function laddaKategorier() {
+async function laddaKattraser() {
   try {
-    // Gör ett API-anrop till CATAAS för att hämta kategorier (t.ex. "boxes", "hats", "sleepy"...)
-    const res = await fetch("https://cataas.com/api/categories");
+    //gör ett API-anrop till TheCatAPI för att hämta kattraser
+    const res = await fetch("https://api.thecatapi.com/v1/breeds");
 
-    // Kontrollera att servern svarade OK, annars skickas felet till catch-blocket
+    //kontrollera att servern svarade OK, annars skickas felet till catch-blocket
     if (!res.ok) {
       throw new Error("Nätverksfel: " + res.status);
     }
 
-    // Tolka svaret som JSON (detta blir en array med strängar)
-    const categories = await res.json();
+    //tolka svaret som JSON och vänta till det är klart
+    const breeds = await res.json();
 
-    // Loopar igenom alla kategorier som API:t skickar tillbaka
-    categories.forEach((category) => {
-      // Skapa ett nytt <option>-element till select-rutan
+    //loopa igenom alla rasobjekt som API:t skickar tillbaka
+    breeds.forEach((breed) => {
+      //skapa ett nytt <option>-element till select-rutan
       const option = document.createElement("option");
-
-      // Kategorinamnet (t.ex. "boxes") blir värdet som används i API-anropet senare
-      option.value = category;
-
-      // Samma namn visas i dropdown-menyn för användaren
-      option.textContent = category;
-
-      // Lägg in det nya <option>-elementet sist i <select>-listan
+      // rasens ID blir värdet på aktuellt option, vilket gör att API:t senare kan filtrera på rätt ras
+      option.value = breed.id;
+      // Namnet som visas i dropdown-menyn
+      option.textContent = breed.name;
+      //lägger in det nya <option>-elementet sist i <select>-listan
       imageTypeSelect.appendChild(option);
     });
   } catch (error) {
-    // Om något går fel i try-blocket ovan hamnar vi här
-    console.error("Kunde inte ladda kategorier", error);
-    // Om det blir fel funkar fortfarande alternativet "Slumpad kattvän" eftersom det redan finns i HTML
+    //om något gåt fel i try-blocket ovan hamnar vi här
+    console.error("Kunde inte ladda kattraser", error);
+    // Om det blir fel funkar fortfarande alternativet "Slumpad kattvän" eftersom den redan fanns
   }
 }
 
-
 // FUNKTION: hamtaKattbild()
-// Hämtar en kattbild från CATAAS.
-// Om användaren har valt en kategori i select-listan använder vi den,
+// Hämtar en kattbild från TheCatAPI.
+// Om användaren har valt en ras i select-listan filtrerar vi på den,
 // annars hämtas en helt slumpad bild.
 async function hamtaKattbild() {
   // Läs av vilket värde som är valt i select-rutan
-  // "random" = ingen specifik kategori, bara en slumpad katt
-  // Annars får vi ett kategorinamn, t.ex. "boxes"
-  const valdKategori = imageTypeSelect.value;
+  // "random" = ingen specifik ras, bara en slumpad bild
+  // Annars får vi ett ras-id.
+  const valdRas = imageTypeSelect.value;
 
-  // Vi bygger upp vilken URL vi ska fråga baserat på valet
-  let apiUrl;
+  // Bas-URL för API:t
+  let url = "https://api.thecatapi.com/v1/images/search";
 
-  if (valdKategori === "random") {
-    // Helt slumpad katt, men vi ber om JSON-svar först
-    apiUrl = "https://cataas.com/cat?json=true";
-  } else {
-    // Slumpad katt inom en viss kategori, t.ex. /cat/boxes
-    apiUrl = `https://cataas.com/cat/${valdKategori}?json=true`;
+  // Om användaren inte valt Slumpad kattbild ("random")
+  // dvs. hen har valt en viss ras, läggs den till som query-parameter
+  if (valdRas !== "random") {
+    url += ?breed_ids=${valdRas};
   }
 
   // Visa i alt-texten att någonting händer
   catImage.alt = "Hämtar bild...";
 
   try {
-    // Hämta data (JSON) från CATAAS
-    const res = await fetch(apiUrl);
+    //hämta data från API:t
+    //fetch() skickar en förfrågan till TheCatAPI
+    const res = await fetch(url);
 
-    // Felhantering om API:t svarar med felkod
+    //felhantering om API:t svarar med felkod
     if (!res.ok) {
       throw new Error("Nätverksfel: " + res.status);
     }
 
-    // Väntar på att JSON-datan ska vara färdig (t.ex. { url: "/cat/abcd123" })
+    //väntar på att JSON-datan ska vara färdig
     const data = await res.json();
 
-    // Säkerhetskoll: finns det verkligen en url i svaret?
-    if (!data || !data.url) {
+    // Säkerhetskoll: finns det verkligen en bild i svaret?
+    if (!data[0] || !data[0].url) {
       throw new Error("Ingen bild hittades");
     }
 
-    // Här bygger vi den fullständiga bild-URL:en
-    // API:t ger t.ex. "/cat/abcd123", så vi lägger till domänen framför
-    const imageUrl = "https://cataas.com" + data.url;
+    //Här är den riktiga bild-URL:en som ska visas
+    const imageUrl = data[0].url;
 
     // Vi skapar en temporär osynlig bild som byts ut när bilden är färdigladdad
-    // (så att vi slipper blink/hopp när bilden byts)
+    // (så att vi slipper blink/hopp)
     const tempImg = new Image();
     tempImg.src = imageUrl;
 
-    // När bilden är helt färdigladdad:
+    // När bilden är färdigladdad visas den på sidan
     tempImg.onload = () => {
       // Byt bildkälla på den synliga <img id="catImage">
       catImage.src = imageUrl;
 
-      // Gör en fade-effekt när den nya bilden visas
+      // Kör fade-effekten
       startFade(catImage);
     };
 
@@ -163,13 +159,12 @@ async function hamtaKattbild() {
   }
 }
 
-
 // KOPPLA FUNKTIONERNA TILL KNAPPARNA
 // (event-lyssnare på knapp-klick)
 factButton.addEventListener("click", hamtaKattfakta); // kör hamtaKattfakta när man klickar på faktaknappen
 imageButton.addEventListener("click", hamtaKattbild); // kör hamtaKattbild när man klickar på bildknappen
 
 
-// INIT: körs en gång när sidan laddas
-// fyller dropdown-listan med alla kategorier från CATAAS-API:t
-laddaKategorier();
+// – fyll select-rutan med alla kattraser från API:t
+// Körs en gång när sidan laddas
+laddaKattraser();

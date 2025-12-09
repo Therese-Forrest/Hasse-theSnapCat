@@ -106,8 +106,9 @@ async function hamtaKattbild() {
 
   // Om användaren inte valt Slumpad kattbild ("random")
   // dvs. hen har valt en viss ras, läggs den till som query-parameter
+
   if (valdRas !== "random") {
-    url += ?breed_ids=${valdRas};
+    url += `?breed_ids=${valdRas}`;
   }
 
   // Visa i alt-texten att någonting händer

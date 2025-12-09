@@ -1,431 +1,434 @@
-/* GRUND: Bakgrundsbilden på sidan */
+/* ============================
+   GRUND: Bakgrundsfärg på sidan
+   ============================ */
 body {
-    background-color: #EBC8D2;                 /* fallback-färg ifall bilden ej laddas */
-    background-image: url("../img/kattassar.png"); /* bakgrundsbild */
-    background-repeat: repeat;                 /* upprepa mönstret som en tapet */
-    background-size: 250px;                    /* kontrollera hur stor bakgrundsbilden (tassarna) är */
-    background-attachment: fixed;              /* gör att tapeten ligger still vid scroll */
-  }
+  background-color: #EBC8D2;   /* ljus rosa bakgrund som sätter tonen för sidan */
+}
 
-
-/* HEADER: kortet med Hasses profil */
+/* ============================
+   HEADER: Hasse-kortet högst upp
+   ============================ */
 #topHeader {
-  max-width: 750px;                             /* begränsar bredden så headern inte blir för bred */
-  margin: 20px auto 30px;                       /* centrerar headern + avstånd uppåt/nedåt */
-  padding: 20px 28px;                           /* luft mellan kant och innehåll i headern */
-  background: rgba(255, 255, 255, 0.85);        /* halvtransparent vit bakgrund för kort-känsla */
-  backdrop-filter: blur(6px);                   /* lätt sudd på bakgrunden bakom kortet */
-  border-radius: 18px;                          /* rundar hörnen på kortet */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);   /* mjuk skugga under headern */
-  display: flex;                                /* använder flexbox för att lägga bild och text i rad */
-  align-items: center;                          /* vertikal centrering av innehållet i headern */
-  gap: 24px;                                    /* avstånd mellan profilbild och textblock */
+  max-width: 750px;                             /* begränsar bredden så headern inte blir för bred på stora skärmar */
+  margin: 20px auto 30px;                       /* centrerar headern och ger luft ovanför/under */
+  padding: 20px 28px;                           /* inner-padding så innehållet inte klistrar mot kanterna */
+  background: rgba(255, 255, 255, 0.85);        /* halvtransparent vit bakgrund för "kort"-känsla */
+  backdrop-filter: blur(6px);                   /* suddar bakgrunden bakom kortet (glassmorphism-effekt) */
+  border-radius: 18px;                          /* rundade hörn */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);   /* mjuk skugga under kortet */
+  display: flex;                                /* flexbox för att lägga bild och text i rad */
+  align-items: center;                          /* vertikalt centrerade innehåll i headern */
+  gap: 24px;                                    /* avstånd mellan profilbilden och textblocket */
 }
 
 /* Profilbilden på Hasse i headern */
 #profilbild {
-  width: 140px;                                 /* bestämmer bildens bredd */
-  height: 140px;                                /* bestämmer bildens höjd (kvadratisk) */
-  object-fit: cover;                            /* beskär bilden så den fyller hela cirkeln utan att bli utdragen */
-  border-radius: 50%;                           /* gör bilden helt rund */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);      /* skugga runt bilden */
-  border: 4px solid #fff;                       /* vit kant runt bilden för extra tydlighet */
+  width: 140px;
+  height: 140px;               /* kvadratisk bild */
+  object-fit: cover;           /* beskär bilden så den fyller ytan utan att förvrängas */
+  border-radius: 50%;          /* gör bilden helt rund (cirkel) */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);  /* skugga runt bilden så den poppar upp lite */
+  border: 4px solid #fff;      /* vit kant runt bilden för en “porträtt”-känsla */
 }
 
 /* Textdelen bredvid bilden (rubrik + tagline) */
 .headerText {
-  flex: 1;                                      /* låter textdelen ta upp allt kvarvarande utrymme i headern */
+  flex: 1;                     /* textblocket får ta upp resten av utrymmet i headern */
 }
 
 /* Rubriken “Hasse - The SnapCat” */
 #rubrik {
-  font-size: 40px;                              /* storlek på rubriktexten */
-  color: #2a1e1e;                               /* textfärg */
-  font-family: "Dancing Script", cursive;       /* skript-typsnitt från Google Fonts */
-  letter-spacing: 1px;                          /* lite extra mellanrum mellan bokstäverna */
-  text-align: center;                           /* centrerar rubriken horisontellt */
-  margin: 0;                                    /* tar bort standardmarginal runt h1 */
-  position: relative;                           /* behövs för att ::before/::after ska placeras korrekt */
+  font-size: 40px;
+  color: #2a1e1e;                           /* mörk brun/svart ton på texten */
+  font-family: "Dancing Script", cursive;   /* script-typsnitt från Google Fonts */
+  letter-spacing: 1px;                      /* lite extra avstånd mellan bokstäverna */
+  text-align: center;
+  margin: 0;                                /* tar bort standardmarginal runt h1 */
+  position: relative;                       /* behövs för tassarna runt rubriken */
 }
 
 /* Tassar före och efter rubriken */
 #rubrik::before,
 #rubrik::after {
-  content: "🐾";                                /* lägger in en tass-emoji före/efter rubriktexten */
-  margin: 0 12px;                               /* avstånd mellan tass och text */
-  font-size: 1.8em;                             /* gör tassarna större än rubriken */
-  vertical-align: middle;                       /* placerar tassarna i samma höjd som texten */
-  display: inline-block;                        /* gör det möjligt att använda transform på tassarna */
+  content: "🐾";                 /* emoji-symbol som dekor */
+  margin: 0 12px;                /* avstånd mellan tass och text */
+  font-size: 1.8em;              /* lite större än texten */
+  vertical-align: middle;        /* justerar tassarnas position i höjdled */
+  display: inline-block;         /* krävs för att transform-justering ska funka */
 }
-
 #rubrik::before {
-  transform: scaleX(-1);                        /* spegelvänder vänstra tassarna för symmetri */
+  transform: scaleX(-1);         /* spegelvänder vänstra tassarna för symmetri */
 }
 
 /* Tagline under rubriken */
 #tagline {
-  margin-top: 6px;                              /* lite luft mellan rubrik och tagline */
-  font-family: "Roboto", sans-serif;            /*typsnitt */
-  font-size: 20px;                              /* storlek på tagline-texten */
-  font-weight: 400;                             /* tjocklek på texten */
-  color: #5a4248;                               /* textfärg */
-  letter-spacing: 0.3px;                        /* extra bokstavsavstånd */
-  font-style: italic;                           /* gör texten kursiv */
-  text-align: center;                           /* centrerar tagline under rubriken */
+  margin-top: 6px;                      /* liten luft under rubriken */
+  font-family: "Roboto", sans-serif;    /* mer lättläst sans-serif */
+  font-size: 18px;
+  font-weight: 400;
+  color: #5a4248;
+  letter-spacing: 0.3px;
+  font-style: italic;                   /* ger lite “personlighet” */
+  text-align: center;
 }
 
-/* INTRODEL: kort med bildrad + introtext */
+/* =========================================
+   INTRODEL: kort med bildrad + introtext
+   ========================================= */
 #introSection {
-  max-width: 950px;                             /* maxbredd på intro-kortet */
-  margin: 30px auto;                            /* centrerar och ger luft ovanför/under kortet */
-  padding: 28px;                                /* inner-marginal så innehållet inte ligger mot kanten */
-  background: rgba(255, 255, 255, 0.75);        /* ljus, halvtransparent vit bakgrund */
-  backdrop-filter: blur(6px);                   /* lätt sudd bakom kortet (glassmorphism) */
-  border-radius: 18px;                          /* rundade hörn */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);      /* mjuk skugga under kortet */
-  border: 1px solid rgba(255, 255, 255, 0.7);   /* ljus kantlinje runt kortet */
+  max-width: 950px;                           /* begränsad bredd för snygg layout */
+  margin: 30px auto;                          /* centrerar sektionen och ger luft runt */
+  padding: 28px;                              /* inner-padding för “kort”-känsla */
+  background: rgba(255, 255, 255, 0.75);      /* ljus, halvtransparent bakgrund */
+  backdrop-filter: blur(6px);                 /* suddar bakgrunden lite */
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 /* Bildraden med tre bilder på Hasse */
 .bildrad {
-  display: flex;                                /* lägger bilderna i rad med flexbox */
-  justify-content: center;                      /* centrerar hela bildraden */
-  gap: 20px;                                    /* avstånd mellan bilderna */
+  display: flex;                 /* bilderna hamnar i rad */
+  justify-content: center;       /* centrerar bildraden */
+  gap: 20px;                     /* avstånd mellan bilderna */
+  padding: 20px;
+  border-radius: 18px;           /* rundade hörn, matchar övrig design */
 }
 
 /* Enskilda bilder i bildraden */
 .bildrad img {
-  width: 200px;                                 /* alla bilder får samma bredd */
-  height: 400px;                                 /* höjd anpassas efter bildens proportion */
-  object-fit: cover;                            /* fyller rutan, beskär om det behövs */
-  border-radius: 18px;                          /* rundade hörn på bilderna */
+  width: 200px;                  /* samma bredd för alla bilder */
+  height: auto;                  /* behåller proportionerna */
+  object-fit: cover;             /* fyller ramen, beskär om det behövs */
+  border-radius: 18px;           /* rundade hörn */
 }
 
-/* Introtexten under bildraden */
+/* Introtexten bredvid/under bilderna */
 #intro {
-  font-size: 20px;                              /* storlek på introtexten */
-  font-weight: 400;                             /* normal tjocklek */
-  text-align: center;                           /* centrerad text */
-  color: black;                                 /* svart textfärg för bra läsbarhet */
-  font-family: "Roboto", sans-serif;           /* samma typsnitt som i resten av sidan */
-  margin: 20px;                                 /* luft runt texten inuti kortet */
-  font-style: italic;                           /* gör texten lite mer personlig med kursiv stil */
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  margin: 20px;                  /* luft runt texten inuti kortet */
+  font-style: italic;            /* ger personlig ton till texten */
 }
 
-/* -------- TVÅ KORT NEDTILL: Kattfakta + Kattbilder -------- */
+
+/* =========================================
+   TVÅ KORT NEDTILL: Kattfakta + Kattbilder
+   ========================================= */
 #bottomSections {
-  max-width: 1000px;                            /* totalbredd för båda korten tillsammans */
-  margin: 40px auto 40px;                       /* centrerar raden med kort och ger luft ovan/under */
-  display: flex;                                /* placerar sektionerna bredvid varandra */
-  gap: 24px;                                    /* avstånd mellan kattfakta-kort och kattbild-kort */
-  justify-content: center;                      /* centrerar korten horisontellt */
-  padding: 0 16px;                              /* lite sidopadding så de inte klistrar mot kanten */
+  max-width: 1000px;       /* begränsar totalbredden på de två korten tillsammans */
+  margin: 40px auto 40px;  /* centrerar och ger luft ovan/under */
+  display: flex;           /* lägger sektionerna i rad */
+  gap: 24px;               /* avstånd mellan kattfakta- och kattbild-kortet */
+  justify-content: center;
+  padding: 0 16px;
 }
 
-/* Gemensam stil för både kattfakta- och kattbilds-korten */
+/* Gemensam kort-stil för både kattfakta- och kattbildssektionen */
 #factSection,
 #imageSection {
-  display: flex;                                /* låter barnen (rubrik, knapp, box) staplas med flex */
-  flex-direction: column;                       /* staplar innehåll uppifrån och ned */
-  min-height: 380px;                            /* ser till att korten inte blir för korta */
-  font-family: "Roboto", sans-serif;           /* samma typsnitt som i övrig text */
-  font-weight: 600;                             /* lite fetare text i korten */
-  text-align: center;                           /* centrerar texten i korten */
-  background: rgba(255, 255, 255, 0.75);        /* ljus kortbakgrund */
-  backdrop-filter: blur(6px);                   /* lätt sudd bakom korten */
-  padding: 28px;                                /* luft inuti korten */
-  border-radius: 18px;                          /* rundade hörn */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);   /* skugga under korten */
-  border: 1px solid rgba(255, 255, 255, 0.7);   /* ljus kant runt korten */
+  display: flex;
+  flex-direction: column;                       /* innehållet staplas uppifrån och ned */
+  min-height: 380px;                            /* gör korten tillräckligt höga */
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.75);        /* “kort”-bakgrund */
+  backdrop-filter: blur(6px);
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
-/* Gör kattfaktakortet lite smalare */
+/* Gör kattfaktakortet lite smalare och kattbildskortet lite bredare */
 #factSection {
-  flex: 1.1;                                    /* tar upp en lite mindre del av raden */
+  flex: 1.1;    /* tar upp lite mindre del av raden */
 }
-
-/* Gör kattbildskortet lite bredare */
 #imageSection {
-  flex: 1.4;                                    /* tar upp en större del av raden */
+  flex: 1.4;    /* tar upp lite mer plats, bra när bilder är fokus */
 }
 
-/* Rubrikerna inne i korten (h2) */
+/* Rubrikerna inne i korten */
 #factSection h2,
 #imageSection h2 {
-  font-size: 24px;                              /* rubrikstorlek */
-  margin-top: 0;                                /* ingen extra toppmarginal */
-  margin-bottom: 12px;                          /* lite luft under rubriken */
-  color: #3a252d;                               /* mörkrosa/brun textfärg */
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #3a252d;
 }
 
-/* -------- KATTFAKTA-KORTET: rutan med själva faktatexten -------- */
+
+/* =======================
+   KATTFAKTA-KORTET
+   ======================= */
+
+/* Rutan där faktatexten visas */
 #factBox {
-  width: 260px;                                 /* fast bredd – matchar bildrutans storlek */
-  min-height: 260px;                            /* fast höjd – ser ut som en kvadrat */
-  margin: 20px auto 0;                          /* centrerar rutan och ger luft ovanför */
-  padding: 16px;                                /* luft mellan kant och text */
-  border-radius: 18px;                          /* rundar hörnen på rutan */
-  background: #fffdf9;                          /* ljus cremefärgad bakgrund inuti rutan */
-  border: 1px solid rgba(0, 0, 0, 0.05);        /* diskret tunn ram runt rutan */
-  display: flex;                                /* flex för att kunna centrera innehållet */
-  align-items: center;                          /* vertikalt centrerad text */
-  justify-content: center;                      /* horisontellt centrerad text */
-  box-sizing: border-box;                       /* inkluderar padding i bredd/höjd-måtten */
+  width: 260px;                            /* fast bredd, matchar bildrutan */
+  min-height: 260px;                       /* fast höjd så layouten inte hoppar */
+  margin: 20px auto 0;                     /* centrerar rutan i kortet */
+  padding: 16px;
+  border-radius: 18px;
+  background: #fffdf9;                     /* ljus insida som kontrast mot kortet */
+  border: 1px solid rgba(0, 0, 0, 0.05);   /* svag kantlinje */
+  display: flex;                           /* flex för att kunna centrera texten vertikalt */
+  align-items: center;                     /* vertikal centrering av innehållet */
+  justify-content: center;                 /* horisontell centrering */
+  box-sizing: border-box;                  /* inkluderar padding i bredd/höjd-beräkningen */
 }
 
-/* Texten som visar kattfaktan */
+/* Själva faktatexten */
 #factText {
-  font-size: 16px;                              /* storlek på faktatexten */
-  font-family: "Roboto", sans-serif;           /* brödtext-typsnitt */
-  line-height: 1.35;                            /* radavstånd för bättre läsbarhet */
-  margin: 0;                                    /* tar bort standardmarginal för p */
-  max-height: 100%;                             /* får inte bli högre än själva rutan */
-  overflow-y: auto;                             /* visar en vertikal scrollbar om texten blir för lång */
-  padding: 0 10px;                              /* lite sidopadding runt texten */
-  text-align: center;                           /* centrerar texten i rutan */
-  display: block;                               /* säkerställer att p beter sig som block (standard) */
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.35;
+  margin: 0;
+  max-height: 100%;        /* får inte bli högre än rutan */
+  overflow-y: auto;        /* om texten blir lång läggs en scroll i rutan */
+  padding: 0 10px;
+  text-align: center;
+  display: block;
 }
 
-/* Tassar automatiskt före och efter faktatexten */
+/* Tassar runt faktatexten – läggs automatiskt före och efter texten */
 #factText::before {
-  content: "🐾";                                /* tass-emoji före texten */
-  font-size: 1.4em;                             /* lite större tassar */
-  margin-right: 8px;                            /* avstånd mellan tass och text */
-  display: inline-block;                        /* gör det möjligt att transformera tassarna */
-  transform: scaleX(-1);                        /* spegelvänder den vänstra tassen */
+  content: "🐾";
+  font-size: 1.4em;
+  margin-right: 8px;
+  display: inline-block;
+  transform: scaleX(-1);   /* spegelvänd tass innan texten */
 }
-
 #factText::after {
-  content: "🐾";                                /* tass-emoji efter texten */
-  font-size: 1.4em;                             /* samma storlek som före */
-  margin-left: 8px;                             /* avstånd mellan text och tass */
-  display: inline-block;                        /* inline-block för konsekvent layout */
+  content: "🐾";
+  font-size: 1.4em;
+  margin-left: 8px;
+  display: inline-block;
 }
 
-/* -------- KATTBILDS-KORTET: rad med select + knapp -------- */
+
+/* =======================
+   KATTBILDS-KORTET
+   ======================= */
+
+/* Wrapper runt select (rasfilter) och knapp */
 #imageControls {
-  display: flex;                                /* lägger select och knapp på samma rad */
-  justify-content: center;                      /* centrerar raden */
-  align-items: center;                          /* centrerar kontrollerna vertikalt */
-  gap: 12px;                                    /* avstånd mellan select och knapp */
-  margin-top: 10px;                             /* liten luft ovanför kontrollraden */
+  display: flex;                 /* lägger select och knapp i rad */
+  justify-content: center;       /* centrerar raden i kortet */
+  align-items: center;           /* vertikal centrering av båda kontrollerna */
+  gap: 12px;                     /* avstånd mellan select och knapp */
+  margin-top: 10px;
 }
 
-/* Justerar selecten inne i kontrollraden */
+/* Justeringar speciellt för select inne i imageControls */
 #imageControls #imageType {
-  margin-top: 0;                                /* tar bort extra toppmarginal så nivåerna matchar knappen */
+  margin-top: 0;   /* annars hamnar select-listan lägre än knappen */
 }
 
-/* Justerar knappen inne i kontrollraden */
+/* Justeringar för knappen inne i raden */
 #imageControls #imageButton {
-  margin-top: 0;                                /* tar bort tidigare toppmarginal */
-  margin-left: 0;                               /* ingen sidomarginal åt vänster */
-  margin-right: 0;                              /* ingen sidomarginal åt höger (centrering sköts av flex) */
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;  /* tar bort auto-marginaler som tidigare centrerade knapparna */
 }
 
 /* Rutan där kattbilden visas */
 #imageBox {
-  width: auto;                                  /* bredden följer innehållet/bildens storlek */
-  min-height: 260px;                            /* minst lika hög som bilden */
-  margin: 20px auto 0;                          /* centrerar rutan och ger luft ovanför */
-  padding: 8px;                                 /* lite inner-padding runt bilden */
-  border-radius: 18px;                          /* rundade hörn */
-  background: #fffdf9;                          /* ljus bakgrund likt faktarutan */
-  border: 1px solid rgba(0, 0, 0, 0.05);        /* tunn diskret kant */
-  display: flex;                                /* flex för att centrera bilden */
-  align-items: center;                          /* vertikal centrering av bilden */
-  justify-content: center;                      /* horisontell centrering av bilden */
+  width: auto;                          /* får anpassa sig efter innehållet */
+  min-height: 260px;                    /* minst lika högt som bilden */
+  margin: 20px auto 0;
+  padding: 8px;
+  border-radius: 18px;
+  background: #fffdf9;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Själva kattbilden */
+/* Alla hämtade bilder visas i samma storlek */
 #catImage {
-  width: auto;                                  /* bredden anpassas efter höjden */
-  height: 260px;                                /* fast höjd så alla bilder blir lika höga */
-  object-fit: cover;                            /* beskär bilden så den fyller rutan utan att bli skev */
-  border-radius: 18px;                          /* rundade hörn */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);       /* mjuk skugga under bilden */
-  display: block;                               /* tar bort ev. extra mellanrum under img (inline-fix) */
+  width: auto;                /* bredd anpassas till höjden */
+  height: 260px;              /* fast höjd för jämn layout */
+  object-fit: cover;          /* beskär bilden så den fyller rutan utan att förvridas */
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  display: block;
 }
 
 /* Gemensam font för select och knapp i bildsektionen */
 #imageType,
 #imageButton {
-  font-family: "Roboto", sans-serif;           /* samma typsnitt på båda kontrollerna */
+  font-family: "Roboto", sans-serif;
 }
 
-/* Select-rutan (rasfilter) */
+/* Select-rutan (ras/filter-lista) */
 #imageType {
-  padding: 10px 20px;                           /* inner-padding för större klickyta */
-  margin-top: 10px;                             /* lite luft ovanför selecten */
-  font-size: 16px;                              /* textstorlek i selecten */
-  font-weight: 600;                             /* lite fetare text */
-  border-radius: 12px;                          /* rundade hörn på select-rutan */
-  border: 2px solid rgba(180, 150, 170, 0.4);   /* svag rosa kant */
-  background: linear-gradient(                  /* mjuk gradient för lyxig känsla */
-    to bottom,
-    #ffffff,
-    #f8f1f4
-  );
-  color: #333;                                  /* mörk text för bra kontrast */
-  cursor: pointer;                              /* visar handpekare vid hover */
-  box-shadow: 0 3px 5px rgba(0,0,0,0.1);        /* liten skugga under select-rutan */
-  transition: 0.3s ease;                        /* mjuk övergång för hover/focus-effekter */
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: 2px solid rgba(180, 150, 170, 0.4);
+  background: linear-gradient(to bottom, #ffffff, #f8f1f4);  /* svag gradient för lyxigare känsla */
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+  transition: 0.3s ease;       /* mjuka övergångar vid hover/focus */
 }
 
-/* Gör så att även alternativen i listan har samma typsnitt */
+/* Gör så att även alternativen i listan använder samma font */
 #imageType,
 #imageType option {
-  font-family: "Roboto", sans-serif;           /* tvingar alternativen att använda Roboto */
+  font-family: "Roboto", sans-serif;
 }
 
 /* Hover-effekt på select-rutan */
 #imageType:hover {
-  border-color: rgba(200, 120, 150, 0.6);       /* lite starkare rosa kant vid hover */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);       /* något större skugga */
-  background: linear-gradient(                  /* lite ljusare gradient vid hover */
-    to bottom,
-    #fff7fc,
-    #f8edf2
-  );
+  border-color: rgba(200, 120, 150, 0.6);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  background: linear-gradient(to bottom, #fff7fc, #f8edf2);
 }
 
-/* Focus-stil när selecten är aktiv */
+/* Focus-stil (när selecten är aktiv) */
 #imageType:focus {
-  outline: none;                                /* tar bort standard-blå outline */
-  border-color: #e5b4c7;                        /* mer markerad rosa kant */
-  box-shadow: 0 0 6px #e8bcd4;                  /* svag glow runt selecten */
+  outline: none;                       /* tar bort standard-blå kant */
+  border-color: #e5b4c7;
+  box-shadow: 0 0 6px #e8bcd4;
 }
 
-/* Gemensam knapp-stil för faktaknapp + kattbildsknapp */
+/* Gemensam knapp-stil för både “Ja! Det vill jag!” och “Visa kattvän” */
 #factButton,
 #imageButton {
-  padding: 12px 24px;                           /* gör knapparna stora och klickvänliga */
-  margin-top: 14px;                             /* avstånd till elementet ovanför */
-  font-size: 18px;                              /* textstorlek i knapparna */
-  border-radius: 14px;                          /* rundade hörn */
-  background: linear-gradient(                  /* rosa gradient för “lyxig” knapp */
-    to bottom,
-    #f4c6d6,
-    #e8a9c3
-  );
-  border: 2px solid rgba(255,255,255,0.6);      /* ljus kant som ger 3D-känsla */
-  color: #4a2e3c;                               /* mörk textfärg som passar mot rosa */
-  font-weight: 600;                             /* lite fetare text i knapparna */
-  cursor: pointer;                              /* hand-pekare när man hovrar */
+  padding: 12px 24px;
+  margin-top: 14px;
+  font-size: 18px;
+  border-radius: 14px;
+  background: linear-gradient(to bottom, #f4c6d6, #e8a9c3);
+  border: 2px solid rgba(255,255,255,0.6);
+  color: #4a2e3c;
+  font-weight: 600;
+  cursor: pointer;
   box-shadow:
-    0 5px 10px rgba(0,0,0,0.15),               /* yttre skugga under knappen */
-    inset 0 1px 3px rgba(255,255,255,0.6);      /* inre highlight högst upp på knappen */
-  transition: 0.25s ease;                       /* mjuk animation för hover/active */
-  display: inline-block;                        /* gör knappen till inline-block */
-  margin-left: auto;                            /* auto-marginal för att centrera knappen horisontellt */
-  margin-right: auto;                           /* auto-marginal för att centrera knappen horisontellt */
+    0 5px 10px rgba(0,0,0,0.15),
+    inset 0 1px 3px rgba(255,255,255,0.6);  /* inre highlight för “3D”-känsla */
+  transition: 0.25s ease;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;                      /* centrerar knapparna i sektionen */
 }
 
-/* Hover-effekt på knapparna – ser ut som att de lyfts lite */
+/* Hover-effekt: knappen lyfts upp lite och får mer skugga */
 #factButton:hover,
 #imageButton:hover {
-  background: linear-gradient(                  /* lite ljusare gradient vid hover */
-    to bottom,
-    #f8d5e2,
-    #e7a0bf
-  );
+  background: linear-gradient(to bottom, #f8d5e2, #e7a0bf);
   box-shadow:
-    0 6px 12px rgba(0,0,0,0.18),                /* något större skugga under knappen */
-    inset 0 2px 4px rgba(255,255,255,0.7);      /* starkare inre highlight */
-  transform: translateY(-2px);                  /* flyttar upp knappen 2px → “poppar upp” */
+    0 6px 12px rgba(0,0,0,0.18),
+    inset 0 2px 4px rgba(255,255,255,0.7);
+  transform: translateY(-2px);            /* liten “lyft”-effekt */
 }
 
-/* Active-effekt – knappen ser nedtryckt ut */
+/* Active-effekt: knappen trycks ned lite */
 #factButton:active,
 #imageButton:active {
-  transform: translateY(1px);                   /* flyttar ned knappen lite */
+  transform: translateY(1px);
   box-shadow:
-    0 3px 6px rgba(0,0,0,0.12),                 /* mindre skugga under knappen */
-    inset 0 1px 2px rgba(255,255,255,0.5);      /* svagare inre highlight */
+    0 3px 6px rgba(0,0,0,0.12),
+    inset 0 1px 2px rgba(255,255,255,0.5);
 }
 
-/* Klass som sätter på en fade-in-animation (används i JS) */
+
+/* ============================
+   FADE-IN ANIMATION
+   ============================ */
+
+/* Klass som triggar en enkel fade-in */
 .fade {
-  animation: fadeIn 1s ease forwards;           /* kör keyframes fadeIn i 1 sekund */
+  animation: fadeIn 1s ease forwards;  /* spelar upp keyframes under 1 sekund */
 }
 
-/* Keyframes: från helt transparent till fullt synlig */
+/* Själva keyframen: från osynlig (0) till fullt synlig (1) */
 @keyframes fadeIn {
-  from { opacity: 0; }                          /* start: osynlig */
-  to   { opacity: 1; }                          /* slut: helt synlig */
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* -------- KATTSTALLET-SEKTION LÄNGST NED -------- */
+
+/* ============================
+   KATTSTALLET-SEKTION NEDTILL
+   ============================ */
 #kattstalletSection {
-  max-width: 950px;                             /* maxbredd på kattstallet-kortet */
-  margin: 20px auto 80px;                       /* centrerar kortet + luft ovanför/under */
-  padding: 28px 32px;                           /* inner-padding runt innehållet */
-  background: rgba(255, 255, 255, 0.75);        /* ljus bakgrund, samma stil som övriga kort */
-  backdrop-filter: blur(6px);                   /* suddar bakgrunden lite */
-  border-radius: 18px;                          /* rundar hörnen */
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);      /* skugga under kortet */
-  border: 1px solid rgba(255, 255, 255, 0.7);   /* ljus kant runt kortet */
-  text-align: center;                           /* centrerar text och logga */
-  font-family: "Roboto", sans-serif;           /* brödtext-typsnitt */
+  max-width: 950px;
+  margin: 20px auto 80px;
+  padding: 28px 32px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 
 /* Kattstallets logga (klickbar bild) */
 #kattstalletlogga {
-  width: 120px;                                 /* loggans bredd */
-  display: block;                               /* visas som blockelement */
-  margin: 0 auto 16px;                          /* centrerar loggan och ger luft under */
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15)); /* liten skugga runt loggan */
-  transition: 0.3s ease;                        /* mjuk övergång för hover-effekten */
+  width: 120px;
+  display: block;
+  margin: 0 auto 16px;                      /* centrerar loggan */
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));  /* skugga under loggan */
+  transition: 0.3s ease;                    /* mjuk transition för hover-effekter */
 }
 
-/* Hover-effekt: mjuk förstoring + rosa glow runt loggan */
+/* Hover-effekt på loggan: mjuk förstoring + glow */
 #kattstalletlogga:hover {
-  transform: scale(1.07);                       /* skalar upp loggan något vid hover */
-  filter: drop-shadow(0 0 10px rgba(255,182,220,0.7)); /* rosa ljusglöd runt loggan */
+  transform: scale(1.07);                                  /* gör loggan lite större när man hovrar */
+  filter: drop-shadow(0 0 10px rgba(255,182,220,0.7));     /* rosa glow runt loggan */
 }
 
-/* Rubrik i kattstallet-kortet */
+/* Rubrik i kattstallet-kortet med tassar runt */
 #kattstalletRubrik {
-  font-size: 28px;                              /* storlek på rubriken */
-  color: #3a252d;                               /* mörk textfärg */
-  margin-top: 0;                                /* ingen extra toppmarginal */
-  margin-bottom: 16px;                          /* luft under rubriken */
-  position: relative;                           /* behövs för tass-dekorationerna */
-  display: inline-block;                        /* gör att tassarna kan ligga runt rubriken */
+  font-size: 28px;
+  color: #3a252d;
+  margin-top: 0;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;     /* behövs för tassarna runt rubriken */
 }
 
 /* Tassar före och efter rubriken */
 #kattstalletRubrik::before,
 #kattstalletRubrik::after {
-  content: "🐾";                                /* tass-emoji som dekoration */
-  font-size: 1.6em;                             /* lite större än rubriken */
-  margin: 0 10px;                               /* avstånd mellan tass och text */
-  vertical-align: -6px;                         /* flyttar upp tassarna lite i höjdled */
-  display: inline-block;                        /* behövs för positionering och transform */
+  content: "🐾";
+  font-size: 1.6em;
+  margin: 0 10px;
+  vertical-align: -6px;      /* lyfter upp tassarna lite så de hamnar snyggt */
+  display: inline-block;
 }
-
 #kattstalletRubrik::before {
-  transform: scaleX(-1);                        /* spegelvänder vänstra tassen */
+  transform: scaleX(-1);     /* spegelvänder vänster tass */
 }
 
 /* Brödtexten i kattstallet-kortet */
 #kattstalletSection p {
-  font-size: 18px;                              /* textstorlek i stycket */
-  line-height: 1.55;                            /* radavstånd för bättre läsbarhet */
-  color: #4a3b41;                               /* mörk, mjuk textfärg */
-  margin: 0;                                    /* tar bort extra marginal runt paragrafen */
+  font-size: 18px;
+  line-height: 1.55;
+  color: #4a3b41;
+  margin: 0;
 }
 
 /* Länkstil för Kattstallet-länkarna */
 #kattstalletSection a {
-  color: #b4668c;                               /* länkarna får en tydlig rosa färg */
-  font-weight: 600;                             /* lite fetare för att sticka ut */
-  text-decoration: none;                        /* tar bort standard-understrykning */
-  transition: 0.25s ease;                       /* mjuk övergång vid hover */
+  color: #b4668c;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s ease;
 }
 
-/* Hover på länkarna: ljusare färg + diskret textskugga */
+/* Hover på länkar: lite ljusare färg + diskret textskugga */
 #kattstalletSection a:hover {
-  color: #d783ad;                               /* ljusare rosa vid hover */
-  text-shadow: 0 1px 4px rgba(0,0,0,0.15);      /* mycket svag skugga bakom texten */
+  color: #d783ad;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }

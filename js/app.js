@@ -1,5 +1,5 @@
 // HÄMTA ELEMENT FRÅN HTML (referenser till DOM-element)
-// Vi sparar pekare till de element vi ska jobba med i JavaScript.
+// Jag sparar pekare till de element vi ska jobba med i JavaScript.
 const factButton = document.getElementById("factButton");   // knappen som hämtar kattfakta
 const factText = document.getElementById("factText");       // rutan där faktan skrivs ut
 
@@ -35,7 +35,7 @@ async function hamtaKattfakta() {
     // fetch skickar en HTTP-förfrågan till API:t
     const res = await fetch("https://catfact.ninja/fact?max_length=140");
 
-    //felhantering om API:t svarar med felkod
+    //felhantering med hjälp av en if-sats om API:t inte svarar med ok
     if (!res.ok) {
       throw new Error("Något gick fel: " + res.status);
     }
@@ -50,7 +50,7 @@ async function hamtaKattfakta() {
     startFade(factText);
 
   } catch (error) {
-    // om något har gått fel (nätverk, API, osv.)
+    // om if-satsen stämmer hamnar vi här, dvs något har gått fel (nätverk, API, osv.)
     console.error(error);
     //felmeddelande visas
     factText.textContent = "Kunde inte hämta kattfakta just nu.";
@@ -62,8 +62,12 @@ async function hamtaKattfakta() {
 // Körs en gång när sidan laddas
 async function laddaKattraser() {
   try {
-    //gör ett API-anrop till TheCatAPI för att hämta kattraser
-    const res = await fetch("https://api.thecatapi.com/v1/breeds");
+    //gör ett API-anrop med API-nyckel till TheCatAPI för att hämta kattraser
+    const res = await fetch("https://api.thecatapi.com/v1/breeds", {
+      headers: {
+        "x-api-key": "live_i6koLVJKtB2xuOn7FwU0ElDyfoVgurQUUbkM8dwagrJxt9nKCknItBAyJGZURUgx"
+      }
+    });
 
     //kontrollera att servern svarade OK, annars skickas felet till catch-blocket
     if (!res.ok) {
@@ -93,7 +97,7 @@ async function laddaKattraser() {
 
 // FUNKTION: hamtaKattbild()
 // Hämtar en kattbild från TheCatAPI.
-// Om användaren har valt en ras i select-listan filtrerar vi på den,
+// Om användaren har valt en ras i select-listan filtreras det på den,
 // annars hämtas en helt slumpad bild.
 async function hamtaKattbild() {
   // Läs av vilket värde som är valt i select-rutan
@@ -111,13 +115,17 @@ async function hamtaKattbild() {
     url += `?breed_ids=${valdRas}`;
   }
 
-  // Visa i alt-texten att någonting händer
+  // Visar i alt-texten att någonting händer
   catImage.alt = "Hämtar bild...";
 
   try {
-    //hämta data från API:t
-    //fetch() skickar en förfrågan till TheCatAPI
-    const res = await fetch(url);
+    //hämta data från API:t TheCatAPI
+
+    const res = await fetch(url, {
+      headers: {
+        "x-api-key": "live_i6koLVJKtB2xuOn7FwU0ElDyfoVgurQUUbkM8dwagrJxt9nKCknItBAyJGZURUgx"
+      }
+    });
 
     //felhantering om API:t svarar med felkod
     if (!res.ok) {

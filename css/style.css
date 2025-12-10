@@ -1,17 +1,18 @@
-/* ============================
-   GRUND: Bakgrundsfärg på sidan
-   ============================ */
+/* BAKGRUND: Bakgrundsbild på sidan*/
 body {
-  background-color: #EBC8D2;   /* ljus rosa bakgrund som sätter tonen för sidan */
+  background-color: #EBC8D2;                 /* reserv-färg ifall bilden ej laddas */
+  background-image: url("../img/kattassar.png"); /* rosa tassbild */
+  background-repeat: repeat;                 /* upprepa mönstret som en tapet */
+  background-size: 250px;                    /* hur stor den repeterade bilden är */
+  background-attachment: fixed;              /* gör att tapeten ligger still vid scroll */
 }
 
-/* ============================
-   HEADER: Hasse-kortet högst upp
-   ============================ */
+
+/* HEADER: Hasse-kortet högst upp */
 #topHeader {
   max-width: 750px;                             /* begränsar bredden så headern inte blir för bred på stora skärmar */
   margin: 20px auto 30px;                       /* centrerar headern och ger luft ovanför/under */
-  padding: 20px 28px;                           /* inner-padding så innehållet inte klistrar mot kanterna */
+  padding: 20px 28px;                           /* inner-padding så innehållet inte kommer för nära kanterna */
   background: rgba(255, 255, 255, 0.85);        /* halvtransparent vit bakgrund för "kort"-känsla */
   backdrop-filter: blur(6px);                   /* suddar bakgrunden bakom kortet (glassmorphism-effekt) */
   border-radius: 18px;                          /* rundade hörn */
@@ -27,8 +28,8 @@ body {
   height: 140px;               /* kvadratisk bild */
   object-fit: cover;           /* beskär bilden så den fyller ytan utan att förvrängas */
   border-radius: 50%;          /* gör bilden helt rund (cirkel) */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);  /* skugga runt bilden så den poppar upp lite */
-  border: 4px solid #fff;      /* vit kant runt bilden för en “porträtt”-känsla */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);  /* skugga runt bilden */
+  border: 4px solid #fff;      /* vit kant runt bilden */
 }
 
 /* Textdelen bredvid bilden (rubrik + tagline) */
@@ -39,10 +40,10 @@ body {
 /* Rubriken “Hasse - The SnapCat” */
 #rubrik {
   font-size: 40px;
-  color: #2a1e1e;                           /* mörk brun/svart ton på texten */
+  color: #2a1e1e;                           /* textfärg */
   font-family: "Dancing Script", cursive;   /* script-typsnitt från Google Fonts */
   letter-spacing: 1px;                      /* lite extra avstånd mellan bokstäverna */
-  text-align: center;
+  text-align: center;                       /* centrerar texten */
   margin: 0;                                /* tar bort standardmarginal runt h1 */
   position: relative;                       /* behövs för tassarna runt rubriken */
 }
@@ -63,27 +64,25 @@ body {
 /* Tagline under rubriken */
 #tagline {
   margin-top: 6px;                      /* liten luft under rubriken */
-  font-family: "Roboto", sans-serif;    /* mer lättläst sans-serif */
+  font-family: "Roboto", sans-serif;    /* typsnitt */
   font-size: 18px;
   font-weight: 400;
   color: #5a4248;
   letter-spacing: 0.3px;
-  font-style: italic;                   /* ger lite “personlighet” */
+  font-style: italic;                   /* kursiv text */
   text-align: center;
 }
 
-/* =========================================
-   INTRODEL: kort med bildrad + introtext
-   ========================================= */
+/* INTRODEL: kort med bildrad + introtext */
 #introSection {
-  max-width: 950px;                           /* begränsad bredd för snygg layout */
+  max-width: 950px;                           /* begränsad bredd */
   margin: 30px auto;                          /* centrerar sektionen och ger luft runt */
   padding: 28px;                              /* inner-padding för “kort”-känsla */
-  background: rgba(255, 255, 255, 0.75);      /* ljus, halvtransparent bakgrund */
+  background: rgba(255, 255, 255, 0.75);      /* bakgrundsfärg */
   backdrop-filter: blur(6px);                 /* suddar bakgrunden lite */
-  border-radius: 18px;
+  border-radius: 18px;                        /* rundade hörn */
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.7);  /* tunn kant */
 }
 
 /* Bildraden med tre bilder på Hasse */
@@ -92,7 +91,7 @@ body {
   justify-content: center;       /* centrerar bildraden */
   gap: 20px;                     /* avstånd mellan bilderna */
   padding: 20px;
-  border-radius: 18px;           /* rundade hörn, matchar övrig design */
+  border-radius: 18px;
 }
 
 /* Enskilda bilder i bildraden */
@@ -100,7 +99,7 @@ body {
   width: 200px;                  /* samma bredd för alla bilder */
   height: auto;                  /* behåller proportionerna */
   object-fit: cover;             /* fyller ramen, beskär om det behövs */
-  border-radius: 18px;           /* rundade hörn */
+  border-radius: 18px;
 }
 
 /* Introtexten bredvid/under bilderna */
@@ -110,14 +109,12 @@ body {
   text-align: center;
   color: black;
   font-family: "Roboto", sans-serif;
-  margin: 20px;                  /* luft runt texten inuti kortet */
-  font-style: italic;            /* ger personlig ton till texten */
+  margin: 20px;
+  font-style: italic;
 }
 
 
-/* =========================================
-   TVÅ KORT NEDTILL: Kattfakta + Kattbilder
-   ========================================= */
+/* TVÅ KORT NEDTILL: Kattfakta + Kattbilder */
 #bottomSections {
   max-width: 1000px;       /* begränsar totalbredden på de två korten tillsammans */
   margin: 40px auto 40px;  /* centrerar och ger luft ovan/under */
@@ -136,7 +133,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   text-align: center;
-  background: rgba(255, 255, 255, 0.75);        /* “kort”-bakgrund */
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(6px);
   padding: 28px;
   border-radius: 18px;
@@ -149,7 +146,7 @@ body {
   flex: 1.1;    /* tar upp lite mindre del av raden */
 }
 #imageSection {
-  flex: 1.4;    /* tar upp lite mer plats, bra när bilder är fokus */
+  flex: 1.4;    /* tar upp lite mer plats */
 }
 
 /* Rubrikerna inne i korten */
@@ -162,9 +159,7 @@ body {
 }
 
 
-/* =======================
-   KATTFAKTA-KORTET
-   ======================= */
+/* KATTFAKTA-KORTET*/
 
 /* Rutan där faktatexten visas */
 #factBox {
@@ -173,10 +168,10 @@ body {
   margin: 20px auto 0;                     /* centrerar rutan i kortet */
   padding: 16px;
   border-radius: 18px;
-  background: #fffdf9;                     /* ljus insida som kontrast mot kortet */
-  border: 1px solid rgba(0, 0, 0, 0.05);   /* svag kantlinje */
+  background: #fffdf9;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;                           /* flex för att kunna centrera texten vertikalt */
-  align-items: center;                     /* vertikal centrering av innehållet */
+  align-items: center;
   justify-content: center;                 /* horisontell centrering */
   box-sizing: border-box;                  /* inkluderar padding i bredd/höjd-beräkningen */
 }
@@ -194,7 +189,7 @@ body {
   display: block;
 }
 
-/* Tassar runt faktatexten – läggs automatiskt före och efter texten */
+/* Tassar runt faktatexten –före och efter texten */
 #factText::before {
   content: "🐾";
   font-size: 1.4em;
@@ -210,9 +205,7 @@ body {
 }
 
 
-/* =======================
-   KATTBILDS-KORTET
-   ======================= */
+/* KATTBILDS-KORTET*/
 
 /* Wrapper runt select (rasfilter) och knapp */
 #imageControls {
@@ -252,14 +245,14 @@ body {
 /* Alla hämtade bilder visas i samma storlek */
 #catImage {
   width: auto;                /* bredd anpassas till höjden */
-  height: 260px;              /* fast höjd för jämn layout */
+  height: 260px;              /* fast höjd för alla bilder */
   object-fit: cover;          /* beskär bilden så den fyller rutan utan att förvridas */
   border-radius: 18px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   display: block;
 }
 
-/* Gemensam font för select och knapp i bildsektionen */
+/* Gemensamt typsnitt för select och knapp i bildsektionen */
 #imageType,
 #imageButton {
   font-family: "Roboto", sans-serif;
@@ -273,7 +266,7 @@ body {
   font-weight: 600;
   border-radius: 12px;
   border: 2px solid rgba(180, 150, 170, 0.4);
-  background: linear-gradient(to bottom, #ffffff, #f8f1f4);  /* svag gradient för lyxigare känsla */
+  background: linear-gradient(to bottom, #ffffff, #f8f1f4);  /* bakgrundsfärg med svag gradient  */
   color: #333;
   cursor: pointer;
   box-shadow: 0 3px 5px rgba(0,0,0,0.1);
@@ -311,7 +304,7 @@ body {
   border: 2px solid rgba(255,255,255,0.6);
   color: #4a2e3c;
   font-weight: 600;
-  cursor: pointer;
+  cursor: pointer;                          /* gör pekare till hand */
   box-shadow:
     0 5px 10px rgba(0,0,0,0.15),
     inset 0 1px 3px rgba(255,255,255,0.6);  /* inre highlight för “3D”-känsla */
@@ -341,9 +334,7 @@ body {
 }
 
 
-/* ============================
-   FADE-IN ANIMATION
-   ============================ */
+/* FADE-IN ANIMATION */
 
 /* Klass som triggar en enkel fade-in */
 .fade {
@@ -357,9 +348,7 @@ body {
 }
 
 
-/* ============================
-   KATTSTALLET-SEKTION NEDTILL
-   ============================ */
+/* KATTSTALLET-SEKTION NEDTILL */
 #kattstalletSection {
   max-width: 950px;
   margin: 20px auto 80px;
